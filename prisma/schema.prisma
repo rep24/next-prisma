@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+//yarn add @prisma/client
+//yarn add prisma --dev
+//npx prisma init ...スキーマ設定フォルダ生成
+//npx prisma migrate dev --name init ...初期マイグレーション
+//npx prisma generate ...スキーマの編集後、prisma clientに反映させる
+
+//package.jsonに各コマンドを定義
+//DBに追加したいデータをseed.tsに記述
+
+//npx prisma db seed ...データ投入
+
+//npx prisma studio ...GUI起動
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Products {
+  //@idは複合IDを定義 @defaultはフィールドのデフォルト値を定義
+  id    Int    @id @default(autoincrement())
+  name  String
+  price Int
+}
